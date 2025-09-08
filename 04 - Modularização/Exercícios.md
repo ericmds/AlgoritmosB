@@ -1,195 +1,171 @@
 # 1. Fazer um programa e dentro dele um método que receba uma palavra (do tipo string) e uma letra (do tipo char). O método deve contar quantas vezes a letra aparece na palavra e exibir essa quantidade
 ```cpp
-import java.util.Scanner;
+#include <iostream>
+#include <string>
+using namespace std;
 
-public class Principal {
-
-    public static int contarLetra(String palavra, char letra) {
-        int contador = 0;
-        for (int i = 0; i < palavra.length(); i++) {
-            if (Character.toLowerCase(palavra.charAt(i)) == Character.toLowerCase(letra)) {
-                contador++;
-            }
+int contarLetra(string palavra, char letra) {
+    int cont = 0;
+    for (char c : palavra) {
+        if (tolower(c) == tolower(letra)) { // ignora maiúsculas/minúsculas
+            cont++;
         }
-        return contador;
     }
+    return cont;
+}
 
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
+int main() {
+    string palavra;
+    char letra;
+    cout << "Digite uma palavra: ";
+    cin >> palavra;
+    cout << "Digite uma letra: ";
+    cin >> letra;
 
-        System.out.print("Digite uma palavra: ");
-        String palavra = teclado.nextLine();
-
-        System.out.print("Digite uma letra: ");
-        char letra = teclado.next().charAt(0);
-
-        int qtd = contarLetra(palavra, letra);
-        System.out.println("A letra '" + letra + "' aparece " + qtd + " vez(es).");
-
-        teclado.close();
-    }
+    cout << "A letra '" << letra << "' aparece " 
+         << contarLetra(palavra, letra) << " vezes.\n";
+    return 0;
 }
 ```
 
 # 2. Fazer um programa e dentro dele um método que receba o dia (string), o mês (string) e o ano (string). O método deve escrever 'DATA VÁLIDA' ou 'DATA INVÁLIDA' para a situação das variáveis passadas
 ```cpp
-import java.util.Scanner;
+#include <iostream>
+#include <string>
+using namespace std;
 
-public class Principal {
+bool dataValida(string diaStr, string mesStr, string anoStr) {
+    int dia = stoi(diaStr);
+    int mes = stoi(mesStr);
+    int ano = stoi(anoStr);
 
-    public static boolean validarData(String dia, String mes, String ano) {
-        try {
-            int d = Integer.parseInt(dia);
-            int m = Integer.parseInt(mes);
-            int a = Integer.parseInt(ano);
+    if (ano < 1 || mes < 1 || mes > 12 || dia < 1) return false;
 
-            if (a < 1 || m < 1 || m > 12 || d < 1) return false;
+    int diasMes[] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
 
-            int[] diasMes = {31, (a % 4 == 0 && (a % 100 != 0 || a % 400 == 0)) ? 29 : 28,
-                             31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    // ano bissexto
+    if ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))
+        diasMes[2] = 29;
 
-            return d <= diasMes[m - 1];
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
+    if (dia > diasMes[mes]) return false;
+    return true;
+}
 
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
+int main() {
+    string d, m, a;
+    cout << "Digite o dia: ";
+    cin >> d;
+    cout << "Digite o mes: ";
+    cin >> m;
+    cout << "Digite o ano: ";
+    cin >> a;
 
-        System.out.print("Digite o dia: ");
-        String dia = teclado.nextLine();
+    if (dataValida(d, m, a))
+        cout << "DATA VALIDA\n";
+    else
+        cout << "DATA INVALIDA\n";
 
-        System.out.print("Digite o mês: ");
-        String mes = teclado.nextLine();
-
-        System.out.print("Digite o ano: ");
-        String ano = teclado.nextLine();
-
-        if (validarData(dia, mes, ano)) {
-            System.out.println("DATA VÁLIDA");
-        } else {
-            System.out.println("DATA INVÁLIDA");
-        }
-
-        teclado.close();
-    }
+    return 0;
 }
 ```
 
 # 3. Fazer um programa que tenha um método que receba uma frase e retorne a quantidade de vogais presentes na frase
 ```cpp
-import java.util.Scanner;
+#include <iostream>
+#include <string>
+using namespace std;
 
-public class Principal {
-
-    public static int contarVogais(String frase) {
-        int contador = 0;
-        frase = frase.toLowerCase();
-
-        for (int i = 0; i < frase.length(); i++) {
-            char c = frase.charAt(i);
-            if ("aeiou".indexOf(c) != -1) {
-                contador++;
-            }
-        }
-        return contador;
+int contarVogais(string frase) {
+    int cont = 0;
+    for (char c : frase) {
+        char ch = tolower(c);
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+            cont++;
     }
+    return cont;
+}
 
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
+int main() {
+    string frase;
+    cout << "Digite uma frase: ";
+    getline(cin, frase);
 
-        System.out.print("Digite uma frase: ");
-        String frase = teclado.nextLine();
-
-        System.out.println("Quantidade de vogais: " + contarVogais(frase));
-
-        teclado.close();
-    }
+    cout << "Quantidade de vogais: " << contarVogais(frase) << "\n";
+    return 0;
 }
 ```
 
 # 4. Fazer um programa que tenha um método que receba uma frase e retorne essa frase totalmente em maiúscula
 ```cpp
-import java.util.Scanner;
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
 
-public class Principal {
-
-    public static String paraMaiuscula(String frase) {
-        return frase.toUpperCase();
+string paraMaiuscula(string frase) {
+    for (char &c : frase) {
+        c = toupper(c);
     }
+    return frase;
+}
 
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
+int main() {
+    string frase;
+    cout << "Digite uma frase: ";
+    getline(cin, frase);
 
-        System.out.print("Digite uma frase: ");
-        String frase = teclado.nextLine();
-
-        System.out.println("Frase em maiúscula: " + paraMaiuscula(frase));
-
-        teclado.close();
-    }
+    cout << "Frase em maiusculas: " << paraMaiuscula(frase) << "\n";
+    return 0;
 }
 ```
 
 # 5. Fazer um programa que tenha um método que receba um vetor de números inteiros, o tamanho desse vetor e retorne true se o vetor estiver ordenado ou false se o vetor estiver desordenado
 ```cpp
-import java.util.Scanner;
+#include <iostream>
+using namespace std;
 
-public class Principal {
-
-    public static boolean estaOrdenado(int[] vetor, int tamanho) {
-        for (int i = 0; i < tamanho - 1; i++) {
-            if (vetor[i] > vetor[i + 1]) {
-                return false;
-            }
-        }
-        return true;
+bool vetorOrdenado(int v[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        if (v[i] > v[i+1])
+            return false;
     }
+    return true;
+}
 
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
+int main() {
+    int n;
+    cout << "Digite o tamanho do vetor: ";
+    cin >> n;
+    int v[n];
+    cout << "Digite os elementos: ";
+    for (int i = 0; i < n; i++) cin >> v[i];
 
-        System.out.print("Digite o tamanho do vetor: ");
-        int n = teclado.nextInt();
-        int[] vetor = new int[n];
-
-        System.out.println("Digite os elementos do vetor:");
-        for (int i = 0; i < n; i++) {
-            vetor[i] = teclado.nextInt();
-        }
-
-        if (estaOrdenado(vetor, n)) {
-            System.out.println("O vetor está ordenado.");
-        } else {
-            System.out.println("O vetor está desordenado.");
-        }
-
-        teclado.close();
-    }
+    if (vetorOrdenado(v, n))
+        cout << "O vetor esta ordenado.\n";
+    else
+        cout << "O vetor NAO esta ordenado.\n";
+    return 0;
 }
 ```
 
 # 6. Fazer um programa que tenha um método que receba um nome completo e retorne o primeiro nome desse nome completo
 ```cpp
-import java.util.Scanner;
+#include <iostream>
+#include <string>
+using namespace std;
 
-public class Principal {
+string primeiroNome(string nomeCompleto) {
+    int pos = nomeCompleto.find(" ");
+    if (pos == string::npos) return nomeCompleto;
+    return nomeCompleto.substr(0, pos);
+}
 
-    public static String primeiroNome(String nomeCompleto) {
-        String[] partes = nomeCompleto.trim().split(" ");
-        return partes[0];
-    }
+int main() {
+    string nome;
+    cout << "Digite seu nome completo: ";
+    getline(cin, nome);
 
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-
-        System.out.print("Digite o nome completo: ");
-        String nome = teclado.nextLine();
-
-        System.out.println("Primeiro nome: " + primeiroNome(nome));
-
-        teclado.close();
-    }
+    cout << "Primeiro nome: " << primeiroNome(nome) << "\n";
+    return 0;
 }
 ```

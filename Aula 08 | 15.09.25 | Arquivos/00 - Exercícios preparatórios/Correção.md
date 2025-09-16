@@ -5,28 +5,51 @@
 #include <iostream>
 #include <string>
 
-#define TAM 5
-
 using namespace std;
 
+#define N 5
+
 void lerNomes(string vetor[], int n) {
-    for(int i = 0; i < n; i++) {
-        cout << "Digite um nome completo: ";
+    for (int i = 0; i < n; i++) {
+        cout << "Nome: ";
         getline(cin, vetor[i]);
     }
 }
 
 void exibirNomes(string vetor[], int n) {
-    for(int i = 0; i < n; i++) {
-        cout << "Nome " << (i+1) << ": " << vetor[i] << endl;
+    for (int i = 0; i < n; i++) {
+        cout << "Nome: " << vetor[i] << endl;
     }
 }
 
-int main() {
-    string vetor[TAM];  // Agora o vetor armazena strings
+void ordenarNomes(string vetor[], int n) {
+    string tmp;
+    bool houveTroca;
 
-    lerNomes(vetor, TAM);
-    exibirNomes(vetor, TAM);
+    do {
+        houveTroca = false;
+        for (int i = 0; i < n-1; i++) {
+            if (vetor[i] > vetor[i+1]) {
+                houveTroca = true;
+                tmp = vetor[i];
+                vetor[i] = vetor[i+1];
+                vetor[i+1] = tmp;
+            }
+        }
+    } while (houveTroca);
+}
+
+int main() {
+    string nomes[N];
+
+    // Rotina para ler/receber nomes completos
+    lerNomes(nomes, N);
+
+    // Rotina para ordenar nomes com bubble sort
+    ordenarNomes(nomes, N);
+
+    // Rotina para exibir os nomes completos
+    exibirNomes(nomes, N);
 
     return 0;
 }
@@ -45,47 +68,58 @@ typedef struct {
 #include <iostream>
 #include <string>
 
-#define TAM 2
-
 using namespace std;
+
+#define N 3
 
 typedef struct {
     string nomeCompleto;
     string sobrenome;
 } Pessoa;
 
-string extrairSobrenome(string nomeCompleto) {
-    size_t pos = nomeCompleto.find_last_of(' ');
-    if(pos == string::npos) {
-        return nomeCompleto;
+string extrairSobrenome(string nome) {
+    string sobrenome;
+    
+    size_t posicao = nome.find_last_of(' ');
+
+    if (posicao != string::npos) {
+        sobrenome = nome.substr(posicao + 1);
     } else {
-        return nomeCompleto.substr(pos + 1);
+        sobrenome = nome;
     }
+
+    return sobrenome;
 }
 
 void lerNomes(Pessoa vetor[], int n) {
-    for(int i = 0; i < n; i++) {
-        cout << "Digite um nome completo: ";
-        getline(cin, vetor[i].nomeCompleto);
-        vetor[i].sobrenome = extrairSobrenome(vetor[i].nomeCompleto);
+    string nomeCompleto;
+    string sobrenome;
+    
+    for (int i = 0; i < n; i++) {
+        cout << "Nome: ";
+        getline(cin, nomeCompleto);
+        
+        sobrenome = extrairSobrenome(nomeCompleto);
+
+        vetor[i].nomeCompleto = nomeCompleto;
+        vetor[i].sobrenome = sobrenome;
     }
-    cout << "\n";
 }
 
 void exibirNomes(Pessoa vetor[], int n) {
-    for(int i = 0; i < n; i++) {
-        cout << "Nome completo pessoa " << (i+1) << ": " << vetor[i].nomeCompleto << endl;
-        cout << "Somente o sobrenome da pessoa " << (i+1) << ": " << vetor[i].sobrenome << endl;
-        cout << "\n";
+    for (int i = 0; i < n; i++) {
+        cout << "Nome completo: " << vetor[i].nomeCompleto << ". Sobrenome: " << vetor[i].sobrenome << endl;
     }
 }
 
-
 int main() {
-    Pessoa vetor[TAM];
+    Pessoa pessoas[N];
 
-    lerNomes(vetor, TAM);
-    exibirNomes(vetor, TAM);
+    // Rotina para ler/receber nomes completos
+    lerNomes(pessoas, N);
+
+    // Rotina para exibir os nomes completos
+    exibirNomes(pessoas, N);
 
     return 0;
 }
@@ -96,51 +130,51 @@ int main() {
 #include <iostream>
 #include <string>
 
-#define TAM 2
-
 using namespace std;
 
-typedef struct {
-    string nomeCompleto;
-    string sobrenome;
-} Pessoa;
+#define N 5
 
-string extrairSobrenome(string nomeCompleto) {
-    size_t pos = nomeCompleto.find_last_of(' ');
-    if(pos == string::npos) {
-        return nomeCompleto;
-    } else {
-        return nomeCompleto.substr(pos + 1);
+void lerNomes(string vetor[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Nome: ";
+        getline(cin, vetor[i]);
     }
 }
 
-void lerNomes(Pessoa vetor[], int n) {
-    for(int i = 0; i < n; i++) {
-        cout << "Digite um nome completo: ";
-        getline(cin, vetor[i].nomeCompleto);
-        vetor[i].sobrenome = extrairSobrenome(vetor[i].nomeCompleto);
+void exibirNomes(string vetor[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Nome: " << vetor[i] << ". Tamanho: " << vetor[i].size() << " caracteres" << endl;
     }
-    cout << "\n";
 }
 
-int contarCaracteres(string nomeCompleto) {
-    return nomeCompleto.length();
-}
+void ordenarNomes(string vetor[], int n) {
+    string tmp;
+    bool houveTroca;
 
-void exibirNomes(Pessoa vetor[], int n) {
-    for(int i = 0; i < n; i++) {
-        cout << "Nome completo pessoa " << (i+1) << ": " << vetor[i].nomeCompleto << endl;
-        cout << "Somente o sobrenome da pessoa " << (i+1) << ": " << vetor[i].sobrenome << endl;
-        cout << "Quantidade de caracteres: " << contarCaracteres(vetor[i].nomeCompleto) << endl;
-        cout << "\n";
-    }
+    do {
+        houveTroca = false;
+        for (int i = 0; i < n-1; i++) {
+            if (vetor[i] > vetor[i+1]) {
+                houveTroca = true;
+                tmp = vetor[i];
+                vetor[i] = vetor[i+1];
+                vetor[i+1] = tmp;
+            }
+        }
+    } while (houveTroca);
 }
 
 int main() {
-    Pessoa vetor[TAM];
+    string nomes[N];
 
-    lerNomes(vetor, TAM);
-    exibirNomes(vetor, TAM);
+    // Rotina para ler/receber nomes completos
+    lerNomes(nomes, N);
+
+    // Rotina para ordenar nomes com bubble sort
+    ordenarNomes(nomes, N);
+
+    // Rotina para exibir os nomes completos
+    exibirNomes(nomes, N);
 
     return 0;
 }

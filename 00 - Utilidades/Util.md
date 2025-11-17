@@ -28,7 +28,7 @@ void split(string vetor[], string str, string deli = " ") {
     vetor[i] = str.substr(start, end - start);
 ```
 
-### contarVogais
+### `contarVogais`
 Conta quantas vogais (maiúsculas e minúsculas) há em uma frase.
 ```h
 #include <string>
@@ -46,7 +46,7 @@ int contarVogais(string frase) {
 }
 ```
 
-### trocarCaracter
+### `trocarCaracter`
 Troca todas as ocorrências de uma letra na frase por @, independentemente de maiúsculas/minúsculas.
 ```h
 #include <string>
@@ -63,7 +63,7 @@ string trocarCaracter(string frase, char letra) {
 
 ```
 
-### trocarCaracterOrigemDestino
+### `trocarCaracterOrigemDestino`
 Substitui todas as ocorrências de uma letra (origem) por outra letra (destino), ignorando maiúsculas/minúsculas.
 ```h
 #include <string>
@@ -79,7 +79,7 @@ string trocarCaracterOrigemDestino(string frase, char letraOrigem, char letraDes
 }
 ```
 
-### contarPalavras
+### `contarPalavras`
 Conta o número de palavras em uma frase usando istringstream.
 ```h
 #include <sstream>
@@ -97,7 +97,7 @@ int contarPalavras(string& frase) {
 }
 ```
 
-### paraMaiusculo
+### `paraMaiusculo`
 ```h
 #include <string>
 using namespace std;
@@ -112,7 +112,7 @@ string paraMaiusculo(string frase) {
 
 ## Arquivos
 
-### existeArquivo
+### `existeArquivo`
 Verifica se um arquivo com o nome dado existe.
 ```h
 #include <fstream>
@@ -131,7 +131,7 @@ bool existeArquivo(string nomeArquivo) {
 
 ```
 
-### copiarArquivo2String
+### `copiarArquivo2String`
 Lê um arquivo inteiro e retorna seu conteúdo como uma única string.
 ```h
 #include <fstream>
@@ -154,7 +154,7 @@ string copiarArquivo2String(string nomeArquivo) {
 }
 ```
 
-### conectarBase (para pessoas)
+### `conectarBase` (para pessoas)
 Abre uma base de dados (arquivo CSV) com nome e email, faz split de cada linha e carrega em um vetor de Pessoa.
 ```h
 #include <iostream>
@@ -191,7 +191,7 @@ int conectarBase(string baseDados, Pessoa vetor[], int tamanho) {
 }
 ```
 
-### conectarBase (para lista de nomes)
+### `conectarBase` (para lista de nomes)
 Lê um arquivo de nomes e carrega cada linha em um vetor de strings.
 ```h
 #include <fstream>
@@ -217,7 +217,7 @@ int conectarBase(string listaNomes[], string nomeBaseDados, int tamanho) {
 
 ## Vetores
 
-### popular
+### `popular`
 Preenche um vetor de inteiros com valores aleatórios entre 0 e 99.
 ```h
 #include <cstdlib>
@@ -237,7 +237,7 @@ void popular(int vetor[], int quantidade, int tamanho) {
 }
 ```
 
-### exibir
+### `exibir`
 Mostra os elementos de um vetor de inteiros, com uma frase de título.
 ```h
 #include <iostream>
@@ -255,7 +255,7 @@ void exibir(string frase, int vetor[], int quantidade, int tamanho) {
 }
 ```
 
-### menorElemento
+### `menorElemento`
 Encontra e exibe o menor valor em um vetor de inteiros.
 ```h
 #include <iostream>
@@ -278,7 +278,7 @@ void menorElemento(int vetor[], int quantidade, int tamanho) {
 
 ## Datas
 
-### escreverSeValida
+### `escreverSeValida`
 Verifica se uma data representada por dia, mês e ano é válida e imprime mensagem correspondente.
 ```h
 #include <iostream>
@@ -297,7 +297,7 @@ void escreverSeValida(int dia, int mes, int ano) {
 }
 ```
 
-### escreverSeValida2
+### `escreverSeValida2`
 ```h
 #include <iostream>
 #include <string>
@@ -319,7 +319,7 @@ void escreverSeValida2(string data) {
 }
 ```
 
-### verificarDataValida
+### `verificarDataValida`
 Retorna true se a data (string "DD/MM/YYYY") é válida, ou false caso contrário.
 ```h
 #include <string>

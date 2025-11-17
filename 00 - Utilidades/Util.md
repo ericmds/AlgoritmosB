@@ -276,6 +276,8 @@ void menorElemento(int vetor[], int quantidade, int tamanho) {
 }
 ```
 
+## Datas
+
 ### escreverSeValida
 Verifica se uma data representada por dia, mês e ano é válida e imprime mensagem correspondente.
 ```h
